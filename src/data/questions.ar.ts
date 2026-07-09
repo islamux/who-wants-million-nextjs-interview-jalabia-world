@@ -132,6 +132,24 @@ export const chapterQuestionsAr: Record<number, Question[]> = {
         { text: 'لا يوجد flicker محتمل طالما PagerState يُنشأ بالـ initialPage.', correct: false },
       ],
     },
+    {
+      text: 'لماذا يُعرَّض `val uiState: StateFlow` للخارج بينما الحقل الداخلي `MutableStateFlow` في ViewModels؟',
+      options: [
+        { text: 'تغليف: الخارج يقرأ فقط عبر StateFlow، والكتابة داخل ViewModel فقط — يمنع تعديل الحالة من أي مكان.', correct: true },
+        { text: 'لا فرق، يمكن إظهار الـ MutableStateFlow مباشرة دون مشاكل.', correct: false },
+        { text: 'StateFlow أبطأ من MutableStateFlow لذلك نستخدم نسختين.', correct: false },
+        { text: 'MutableStateFlow لا يعمل مع collectAsState في Compose.', correct: false },
+      ],
+    },
+    {
+      text: 'لماذا `rememberCoroutineScope()` (وليس viewModelScope) لإطلاق `pagerState.scrollToPage` داخل الـ Slider؟',
+      options: [
+        { text: 'مرتبط بدورة حياة الـ composition: يُلغى عند مغادرة الشاشة؛ scrollToPage عملية UI وليست منطق عمل.', correct: true },
+        { text: 'viewModelScope أفضل دائماً في كل كوروتين داخل Compose.', correct: false },
+        { text: 'rememberCoroutineScope يعيش بعد تدمير الشاشة ويبقى للجلسة كلها.', correct: false },
+        { text: 'scrollToPage ليست suspend فلا تحتاج scope أصلاً.', correct: false },
+      ],
+    },
   ],
   4: [
     {
@@ -236,6 +254,62 @@ export const chapterQuestionsAr: Record<number, Question[]> = {
       ],
     },
   ],
+  6: [
+    {
+      text: 'لماذا `const val HOME = "home"` داخل `object Routes` وليس `val` عادية؟',
+      options: [
+        { text: 'const val ثابت compile-time يُضمَّن في مواقع الاستخدام دون إنشاء الـ object — أسرع ولا allocation.', correct: true },
+        { text: 'val و const val متطابقان تماماً في الـ bytecode المُولَّد.', correct: false },
+        { text: 'const val يعمل فقط في top-level ولا يُسمح به داخل object.', correct: false },
+        { text: 'const val يضيف heap allocation لكل استخدام لأنه يُنشئ كائن String.', correct: false },
+      ],
+    },
+    {
+      text: 'لماذا `Intent().apply { action = ...; putExtra(...) }` وليس `also` أو `let`؟',
+      options: [
+        { text: 'apply يعيد الـ receiver نفسه بعد تكوينه — مناسب لبناء Intent وتعديله في سلسلة.', correct: true },
+        { text: 'also يعيد نتيجة lambda وليس الـ receiver.', correct: false },
+        { text: 'let يحافظ على receiver ولا يحتاج return صريح.', correct: false },
+        { text: 'apply و run نفس الشيء تماماً ويعيدان نتيجة lambda.', correct: false },
+      ],
+    },
+    {
+      text: 'ماذا يضمن `.bufferedReader().use { it.readText() }` ولماذا لو أزلنا `use`؟',
+      options: [
+        { text: 'إغلاق الـ stream تلقائياً حتى عند الاستثناء؛ بدونه leak لمؤشر الملف.', correct: true },
+        { text: 'use مجرد syntax sugar لا يُغلق شيئاً تلقائياً.', correct: false },
+        { text: 'readText يُغلق القارئ تلقائياً فلا حاجة لـ use.', correct: false },
+        { text: 'use يعمل فقط على Cursor وليس مدعوماً على Reader.', correct: false },
+      ],
+    },
+    {
+      text: 'لماذا `JsonKhatiraRepository(context.applicationContext)` في singleton وليس `context` مباشرة؟',
+      options: [
+        { text: 'الـ singleton يعيش طوال العملية؛ حفظ Activity context يسبب leak للـ Activity عند تدويرها. applicationContext آمن.', correct: true },
+        { text: 'applicationContext أبطأ من Activity context في فتح assets.', correct: false },
+        { text: 'لا فرق، كلاهما نفس الكائن تماماً.', correct: false },
+        { text: 'applicationContext لا يعمل مع assets.open إطلاقاً.', correct: false },
+      ],
+    },
+    {
+      text: 'كيف يعمل `decodeFromString<KhatiraContent>(...)` دون تمرير Class<T> صراحة؟',
+      options: [
+        { text: 'الدالة inline + reified type parameter: المترجم يعرف KhatiraContent::class في موقع الاستدعاء ويولّد الـ serializer.', correct: true },
+        { text: 'reified متاح في كل الدوال العادية بدون الحاجة لـ inline.', correct: false },
+        { text: 'decodeFromString يستخدم reflection على T::class.java في كل استدعاء.', correct: false },
+        { text: 'reified يضيف heap allocation لكل استدعاء لأنه يُنشئ كائن Class.', correct: false },
+      ],
+    },
+    {
+      text: 'لماذا نحتاج Factory مع `@Suppress("UNCHECKED_CAST")` بدلاً من `viewModel()` المباشر؟',
+      options: [
+        { text: 'ViewModel الافتراضية لا تقبل constructor params؛ Factory تبنيها بالـ repository. الـ cast آمن منطقياً لكن المترجم لا يثبته — لذا @Suppress.', correct: true },
+        { text: 'viewModel() تبني أي ViewModel تلقائياً حتى لو احتاج constructor params دون Factory.', correct: false },
+        { text: 'UNCHECKED_CAST يعني خطأ runtime مؤكد لا محالة.', correct: false },
+        { text: 'Factory يُلغي حاجة ViewModel لـ viewModelScope تماماً.', correct: false },
+      ],
+    },
+  ],
 }
 
 export const moneyLevelsAr: MoneyLevel[] = [
@@ -253,6 +327,7 @@ export const chapterListAr = [
   { id: 3, title: 'تتبع التدفق' },
   { id: 4, title: 'اكتشف المشاكل' },
   { id: 5, title: 'نظرية عامة' },
+  { id: 6, title: 'كوتلن من الميدان' },
 ]
 
 export const chapterNamesAr: Record<number, string> = {
@@ -261,4 +336,5 @@ export const chapterNamesAr: Record<number, string> = {
   3: 'الثالث',
   4: 'الرابع',
   5: 'الخامس',
+  6: 'السادس',
 }
