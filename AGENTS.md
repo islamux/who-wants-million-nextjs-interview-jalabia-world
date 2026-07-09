@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Arabic "Who Wants to Be a Millionaire?" technical interview game with 6 chapters (32 questions total) covering Next.js, React, TypeScript, and next-intl. Content is derived from a technical interview for the New Muslim Stories Next.js/React project. Bilingual (Arabic / English) — runtime language toggle with auto-detect and localStorage persistence; English flips the layout to LTR. Converted from Vue 2 CDN to React + TypeScript + Vite + PWA.
+Arabic "Who Wants to Be a Millionaire?" technical interview game with 6 chapters (32 questions total) covering Next.js, React, TypeScript, and next-intl. Bilingual (Arabic / English) — runtime language toggle with auto-detect and localStorage persistence; English flips the layout to LTR. Converted from Vue 2 CDN to React + TypeScript + Vite + PWA.
 
 ## Tech Stack
 

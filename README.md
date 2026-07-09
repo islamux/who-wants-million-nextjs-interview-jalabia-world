@@ -2,7 +2,7 @@
 
 > Arabic "Who Wants to Be a Millionaire?" technical interview game — 6 chapters, 32 Next.js/React/TypeScript/i18n questions total, built with React 19 + TypeScript 6 + Vite 8 + PWA.
 
-**لعبة مقابلة فنية تفاعلية من 6 جولات و32 سؤالاً عن Next.js و React و TypeScript و next-intl، مبنية بأحدث تقنيات الويب. المحتوى مستوحى من مقابلة تقنية لمشروع New Muslim Stories.**
+**لعبة مقابلة فنية تفاعلية من 6 جولات و32 سؤالاً عن Next.js و React و TypeScript و next-intl، مبنية بأحدث تقنيات الويب.**
 
 [![Stack](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript)](https://www.typescriptlang.org)
