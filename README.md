@@ -1,8 +1,8 @@
 # من سيربح المليون
 
-> Arabic "Who Wants to Be a Millionaire?" technical interview game — 5 rounds, 25 Kotlin/Android/Compose questions total, built with React 19 + TypeScript 6 + Vite 8 + PWA.
+> Arabic "Who Wants to Be a Millionaire?" technical interview game — 6 chapters, 32 Next.js/React/TypeScript/i18n questions total, built with React 19 + TypeScript 6 + Vite 8 + PWA.
 
-**لعبة مقابلة فنية تفاعلية من 5 جولات و25 سؤالاً عن Kotlin و Android و Jetpack Compose، مبنية بأحدث تقنيات الويب. المحتوى مستوحى من مقابلة تقنية لمشروع Salamm (Khatir).**
+**لعبة مقابلة فنية تفاعلية من 6 جولات و32 سؤالاً عن Next.js و React و TypeScript و next-intl، مبنية بأحدث تقنيات الويب. المحتوى مستوحى من مقابلة تقنية لمشروع New Muslim Stories.**
 
 [![Stack](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript)](https://www.typescriptlang.org)
@@ -14,7 +14,7 @@
 
 ## Features
 
-- **5 rounds** — Kotlin/Android technical interview: basics, architecture, flow tracing, code review, theory
+- **6 chapters** — Next.js/React technical interview: basics, architecture, state & data flow, i18n, styling & PWA, TypeScript edge cases
 - **25 questions total** — 5 + 5 + 4 + 5 + 6 per round, classic Millionaire format (4 options, 1 correct)
 - **Bilingual (Arabic / English)** — runtime language toggle (auto-detect from browser, persisted in localStorage); layout flips to LTR in English
 - **Prize ladder** — 6 tiers with safe havens at levels 3 (10,000) and 5 (250,000); 1,000,000 at level 6

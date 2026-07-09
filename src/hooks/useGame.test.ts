@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { gameReducer, createInitialState, generateAudiencePoll } from './useGame'
 import { chapterQuestionsAr } from '../data/questions.ar'
+import { chapterQuestionsEn } from '../data/questions.en'
 import { getQuestionsData } from '../data/questions'
 
 const TEST_CHAPTER = 5
@@ -253,18 +254,41 @@ describe('generateAudiencePoll', () => {
 describe('getQuestionsData', () => {
   it('returns Arabic content for "ar"', () => {
     const d = getQuestionsData('ar')
-    expect(d.chapterList[0].title).toContain('Kotlin')
+    expect(d.chapterList[0].title).toContain('Next.js')
     expect(d.moneyLevels[0].amount).toContain('ريال')
     expect(d.chapterNames[1]).toBe('الأول')
   })
   it('returns English content for "en"', () => {
     const d = getQuestionsData('en')
-    expect(d.chapterList[0].title).toBe('Kotlin & Android Basics')
+    expect(d.chapterList[0].title).toBe('Next.js & React Basics')
     expect(d.moneyLevels[0].amount).toBe('1,000 SAR')
     expect(d.chapterNames[1]).toBe('First')
   })
   it('en money levels keep the safe-haven pattern [F,F,T,F,T,F]', () => {
     const d = getQuestionsData('en')
     expect(d.moneyLevels.map(m => m.isSafeHaven)).toEqual([false, false, true, false, true, false])
+  })
+})
+
+function validateQuestionBank(label: string, chapters: Record<number, { text: string; options: { text: string; correct: boolean }[] }[]>) {
+  for (const [chapterId, questions] of Object.entries(chapters)) {
+    for (const question of questions) {
+      if (!question.text.trim()) throw new Error(`${label} chapter ${chapterId} has an empty question`)
+      if (question.options.length !== 4) throw new Error(`${label} chapter ${chapterId} question does not have 4 options`)
+      const correctCount = question.options.filter(o => o.correct).length
+      if (correctCount !== 1) throw new Error(`${label} chapter ${chapterId} question has ${correctCount} correct answers`)
+      for (const option of question.options) {
+        if (!option.text.trim()) throw new Error(`${label} chapter ${chapterId} has an empty option`)
+      }
+    }
+  }
+}
+
+describe('question bank validation', () => {
+  it('Arabic question bank has 4 options and exactly one correct answer per question', () => {
+    expect(() => validateQuestionBank('AR', chapterQuestionsAr)).not.toThrow()
+  })
+  it('English question bank has 4 options and exactly one correct answer per question', () => {
+    expect(() => validateQuestionBank('EN', chapterQuestionsEn)).not.toThrow()
   })
 })

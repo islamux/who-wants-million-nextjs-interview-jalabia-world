@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Arabic "Who Wants to Be a Millionaire?" technical interview game with 5 rounds (25 questions total) covering Kotlin, Android, and Jetpack Compose. Content is derived from a technical interview for the Salamm (Khatir) Kotlin/Compose project. Bilingual (Arabic / English) — runtime language toggle with auto-detect and localStorage persistence; English flips the layout to LTR. Converted from Vue 2 CDN to React + TypeScript + Vite + PWA.
+Arabic "Who Wants to Be a Millionaire?" technical interview game with 6 chapters (32 questions total) covering Next.js, React, TypeScript, and next-intl. Content is derived from a technical interview for the New Muslim Stories Next.js/React project. Bilingual (Arabic / English) — runtime language toggle with auto-detect and localStorage persistence; English flips the layout to LTR. Converted from Vue 2 CDN to React + TypeScript + Vite + PWA.
 
 ## Tech Stack
 
@@ -29,7 +29,7 @@ Arabic "Who Wants to Be a Millionaire?" technical interview game with 5 rounds (
 - **No router** — single page, `GamePhase` enum drives rendering: `idle` → `playing` → `gameover`
 - **State**: `useReducer` in `src/hooks/useGame.ts` — single `GameState` object + discriminated `GameAction` union
 - **Audio**: `src/hooks/useSound.ts` — Tone.js synths initialized lazily on first user interaction
-- **Chapters**: user picks from 5 rounds on StartScreen → game loads that round's questions (5/5/4/5/6 per round)
+- **Chapters**: user picks from 6 chapters on StartScreen → game loads that chapter's questions (5/5/6/5/6/5 per chapter, 32 total)
 - **Money levels**: 6 tiers with safe havens at levels 3 (10,000), 5 (250,000), and 1,000,000 at level 6
 - **50/50 lifeline**: mutates `activeQuestions` array in-place (safe — cloned per game)
 - **i18n**: `LocaleProvider` + `useI18n()` from `src/i18n/LocaleContext.tsx`. Per-locale data in `src/data/questions.{ar,en}.ts`. UI strings in `src/i18n/ui.ts`; game-message formatter in `src/i18n/messages.ts`. Reducer is locale-agnostic (message keys + indices). Language toggle disabled during play; works on idle/gameover.
