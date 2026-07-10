@@ -66,7 +66,8 @@ Arabic "Who Wants to Be a Millionaire?" technical interview game with 6 chapters
 ## PWA Notes
 
 - Auto-updating service worker via `vite-plugin-pwa` with Workbox
-- Manifest: Arabic name, RTL, gold theme (#ffd700), standalone display
+- Manifest: Arabic name, RTL, gold theme (#ffd700), standalone display, categories (education, games)
+- Icons have `purpose: "any maskable"` for Android adaptive icon support
 - Pre-caches all build assets for full offline play
 - Icons generated via ImageMagick from original logo
 

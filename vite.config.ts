@@ -19,16 +19,22 @@ export default defineConfig({
         orientation: 'portrait',
         lang: 'ar',
         dir: 'rtl',
+         categories: ['education', 'games'],
+        start_url: '/',
+        scope: '/',
+        id: 'who-wants-million-nextjs-interview',
         icons: [
           {
             src: '/million-192.png',
             sizes: '192x192',
-            type: 'image/png'
+            type: 'image/png',
+            purpose: 'any maskable'
           },
           {
             src: '/million-512.png',
             sizes: '512x512',
-            type: 'image/png'
+            type: 'image/png',
+            purpose: 'any maskable'
           }
         ]
       },

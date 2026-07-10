@@ -15,7 +15,7 @@
 ## Features
 
 - **6 chapters** — Next.js/React technical interview: basics, architecture, state & data flow, i18n, styling & PWA, TypeScript edge cases
-- **25 questions total** — 5 + 5 + 4 + 5 + 6 per round, classic Millionaire format (4 options, 1 correct)
+- **32 questions total** — 5 + 5 + 6 + 5 + 6 + 5 per chapter, classic Millionaire format (4 options, 1 correct)
 - **Bilingual (Arabic / English)** — runtime language toggle (auto-detect from browser, persisted in localStorage); layout flips to LTR in English
 - **Prize ladder** — 6 tiers with safe havens at levels 3 (10,000) and 5 (250,000); 1,000,000 at level 6
 - **Lifelines** — 50:50 (eliminate 2 wrong answers), audience poll, walk away
@@ -55,8 +55,8 @@ pnpm test       # run Vitest suite
 - **State** — `useReducer` in `src/hooks/useGame.ts` with a single `GameState` object and discriminated `GameAction` union
 - **Audio** — `src/hooks/useSound.ts`; Tone.js synths initialized lazily on first user interaction (browser policy)
 - **i18n** — `src/i18n/LocaleContext.tsx` provides `useLocale()` and `useI18n()`. Per-locale data files (`data/questions.ar.ts` / `data/questions.en.ts`) hold chapter questions, money levels, chapter list, and ordinal names. The reducer is locale-agnostic: `GameMessage` carries a `key` and indices (`prizeIndex`/`correctIndex`); `GameState.scoreIndex` replaces the old `score: string`. Localization happens at the render boundary via `formatMessage()` and the `ui` dictionary.
-- **Questions** — hardcoded in `src/data/questions.ts` (selector); 5 rounds × 4-6 questions (25 total), all Arabic RTL
-- **Chapters** — user picks a round on `StartScreen` → game loads that round's questions
+- **Questions** — hardcoded in `src/data/questions.ts` (selector); 6 chapters × 5-6 questions (32 total), bilingual Arabic/English
+- **Chapters** — user picks a chapter on `StartScreen` → game loads that chapter's questions
 - **50/50** — mutates the active questions array in-place (safe because questions are cloned per game)
 
 ### Data Flow
@@ -87,8 +87,8 @@ App.tsx — distributes state as props
 | `src/i18n/ui.ts` | UI string dictionary (~22 static + 4 interpolated) |
 | `src/i18n/messages.ts` | `formatMessage()` for the 5 game messages |
 | `src/data/questions.ts` | `getQuestionsData(locale)` selector + `getSafeHavenIndex` |
-| `src/data/questions.ar.ts` | Arabic content (25 Qs, 6 money levels, 5 chapters) |
-| `src/data/questions.en.ts` | English content (25 Qs translated, SAR amounts) |
+| `src/data/questions.ar.ts` | Arabic content (32 Qs, 6 money levels, 6 chapters) |
+| `src/data/questions.en.ts` | English content (32 Qs translated, SAR amounts) |
 | `src/types/game.ts` | TypeScript types (GameState, GameAction, etc.) |
 | `src/components/LanguageToggle.tsx` | Fixed-corner language switch (disabled mid-game) |
 | `src/components/StartScreen.tsx` | Round selection grid |
@@ -105,8 +105,8 @@ src/
 ├── types/game.ts            # All TypeScript types (locale-agnostic)
 ├── data/
 │   ├── questions.ts         # getQuestionsData(locale) selector + getSafeHavenIndex
-│   ├── questions.ar.ts      # Arabic content (25 Qs, 6 money levels, 5 chapters)
-│   └── questions.en.ts      # English content (25 Qs translated, SAR amounts)
+│   ├── questions.ar.ts      # Arabic content (32 Qs, 6 money levels, 6 chapters)
+│   └── questions.en.ts      # English content (32 Qs translated, SAR amounts)
 ├── i18n/
 │   ├── LocaleContext.tsx    # Provider, useLocale(), useI18n()
 │   ├── ui.ts                # UI string dictionary
